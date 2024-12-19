@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using User.Interfaces;
 using User.Persistence;
@@ -18,6 +19,11 @@ namespace User
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             //builder.Services.AddDbContext<AppDbContext>(ctx => { ctx.UseInMemoryDatabase("UserDb"); });
+            builder.Services.AddAuthorization();
+
+            //TODO: Further define the authentication requirement.
+            //Preference would be to use Federated Identity provider / OIDC
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
 
             var app = builder.Build();
 
