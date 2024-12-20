@@ -36,6 +36,7 @@ namespace User
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
