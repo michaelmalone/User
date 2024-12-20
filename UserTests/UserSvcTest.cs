@@ -1,21 +1,24 @@
 using Microsoft.Extensions.Logging;
 using Moq;
 using User.Domain;
+using User.Interfaces;
 using User.Services;
 
 namespace UserTests
 {
     public class UserSvcTest
     {
-        private Mock<ILogger> mockLogger;
+        private Mock<ILogger<IUserSvc>> mockLogger;
+        private Mock<IProductSvcAdapter> mockProductSvcAdapter;
         private UserSvc userSvc;
 
         //Initialize
         //[Test]
         public void Init()
         {
-            mockLogger = new Mock<ILogger>();
-            userSvc = new UserSvc(mockLogger.Object);
+            mockLogger = new Mock<ILogger<IUserSvc>>();
+
+            userSvc = new UserSvc(mockLogger.Object, mockProductSvcAdapter.Object);
         }
 
         [Fact]

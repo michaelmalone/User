@@ -5,7 +5,7 @@ using User.Interfaces;
 
 namespace User.Adapters
 {
-    public class ProductSvcAdapter : ISvcAdapter
+    public class ProductSvcAdapter : IProductSvcAdapter
     {
         DaprClient _client; 
         public ProductSvcAdapter(DaprClient client) 
@@ -16,14 +16,21 @@ namespace User.Adapters
         public async Task<Product[]> GetProducts(
         int maxItems = 10, CancellationToken cancellationToken = default)
         {
-            List<Product>? products =
+            try
+            {
+                List<Product>? products =
                 await _client.InvokeMethodAsync<List<Product>>(
                     HttpMethod.Get,
-                    "apiservice",
-                    "product",
+                    "productapi",
+                    "products",
                     cancellationToken);
 
-            return products?.Take(maxItems)?.ToArray() ?? [];
+                return products?.Take(maxItems)?.ToArray() ?? [];
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
     }

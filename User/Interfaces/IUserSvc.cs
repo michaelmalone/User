@@ -7,8 +7,8 @@ namespace User.Interfaces
     public interface IUserSvc
     {
         
-        public AppUser Create(AppUser user);
+        Task<AppUser> Create(AppUser user);
 
-
+        Task<Product[]> GetProducts(int maxItems = 10, CancellationToken cancellationToken = default);
     }
 }

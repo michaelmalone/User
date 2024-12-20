@@ -2,7 +2,7 @@
 
 namespace User.Interfaces
 {
-    public interface ISvcAdapter
+    public interface IProductSvcAdapter
     {
 
          Task<Product[]> GetProducts(int maxItems = 10, CancellationToken cancellationToken = default);
